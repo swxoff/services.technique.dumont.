@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Techniques Dumont</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+        }
+
+        /* En-tête */
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 4px solid #34495e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: normal;
+        }
+
+        /* Navigation */
+        nav {
+            margin-top: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+
+        /* Contenu principal */
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s ease;
+        }
+
+        main h2 {
+            color: #8e0707;
+        }
+
+        main p {
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        /* Horloge (indice caché) */
+        #clock {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 25px;
+            cursor: pointer;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+
+        #clock:hover {
+            opacity: 1;
+        }
+
+        /* Page cachée */
+        .hidden-page {
+            display: none;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden-page h2 {
+            margin-top: 0;
+            color: #7d0606;
+        }
+
+        .hidden-page p {
+            font-size: 1.1em;
+        }
+
+        .hidden-page input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .hidden-page button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #6c0101;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .hidden-page button:hover {
+            background-color: #8b0606;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #500606;
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #fff;
+            border-top: 4px solid #34495e;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Effets subtils pour l'immersion */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+
+        header h1 {
+            animation: flicker 3s infinite;
+        }
+
+        /* Formulaire de contact */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        form input, form textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        form button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #850808;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #900b0b;
+        }
+
+        /* Sections cachées */
+        section {
+            display: none;
+        }
+
+        section:target {
+            display: block;
+        }
+
+        /* Style pour la page de résultats */
+        .info {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            border-radius: 8px;
+            transition: all 0.5s ease;
+        }
+
+        .info.blur {
+            filter: blur(5px);
+        }
+
+        .info.reveal {
+            filter: blur(0);
+            color: #ff0000;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+        }
+
+        .video-link {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ff0000;
+            text-decoration: none;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        .video-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Effet de fond noir et texte rouge */
+        .dark-mode {
+            background-color: #000;
+            color: #660606;
+        }
+
+        .dark-mode main {
+            background-color: #000;
+            color: #670606;
+        }
+
+        .dark-mode .info {
+            background-color: #000;
+            color: #680303;
+        }
+
+        /* Images creepy */
+        .creepy-image {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Enigmes supplémentaires */
+        .enigme {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #1a1a1a;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .enigme h3 {
+            color: #880909;
+        }
+
+        .enigme input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .enigme button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #880a0a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .enigme button:hover {
+            background-color: #830808;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Services Techniques Dumont</h1>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section Accueil -->
+        <section id="accueil">
+            <h2>Bienvenue</h2>
+            <p>Nous offrons des services de réparation et de maintenance depuis 1985. Faites-nous confiance pour tous vos besoins techniques.</p>
+            <img src="c:\Users\NC.GESTION\Downloads\help_15418.webp" alt="help" id="clock">
+            <div id="hiddenPage" class="hidden-page">
+                <h2>Vous avez trouvé la porte...</h2>
+                <p>Répondez à cette question pour avancer :</p>
+                <p><em>"je protege de tout mais 1 objet est ma faiblesse, qui suis-je ?"</em></p>
+                <input type="text" id="answer" placeholder="Votre réponse">
+                <button onclick="checkAnswer()">Valider</button>
+                <p id="result"></p>
+            </div>
+
+            <!-- Énigme 2 (apparaît après avoir résolu l'énigme principale) -->
+            <div id="enigme2" class="enigme" style="display: none">
+                <h3>Énigme 2 : Le Mot de Passe</h3>
+                <p><em>"Je suis composé de 5 lettres. Je commence par 'S' et finis par 'E'. Je suis souvent utilisé pour protéger."</em></p>
+                <input type="text" id="reponseEnigme2" placeholder="Votre réponse">
+                <button onclick="checkEnigme2()">Valider</button>
+                <p id="resultEnigme2"></p>
+            </div>
+
+            <!-- Énigme 3 (apparaît après avoir résolu l'énigme 2) -->
+            <div id="enigme3" class="enigme" style="display: none">
+                <h3>Énigme 3 : L'Image Mystérieuse</h3>
+                <p><em>"Regardez attentivement l'image ci-dessous. Que voyez-vous ?"</em></p>
+                <img src="c:\Users\NC.GESTION\Downloads\creepy-looking-figure-smiling-dark-600nw-2348912379.webp" alt="Image Creepy" class="creepy-image">
+                <input type="text" id="reponseEnigme3" placeholder="Votre réponse">
+                <button onclick="checkEnigme3()">Valider</button>
+                <p id="resultEnigme3"></p>
+            </div>
+
+             <!-- Section des informations personnelles (apparaît après avoir résolu toutes les énigmes) -->
+             <div id="infoPerso" class="info reveal" style="display: none">
+                <h2>Informations Trouvées</h2>
+                <div id="ip">IP : 86.45.785.11</div>
+                <div id="name">Nom : alexandra</div>
+                <div id="location">Localisation : 45.123456, -73.654321</div>
+                <a id="videoLink" class="video-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="display: none;">Voir la vidéo</a>
+            </div>
+        </section>
+
+        <!-- Section Services -->
+        <section id="services">
+            <h2>Nos Services</h2>
+            <p>Nous proposons une gamme complète de services techniques pour répondre à vos besoins :</p>
+            <ul>
+                <li>Réparation d'équipements industriels</li>
+                <li>Maintenance préventive et corrective</li>
+                <li>Installation de systèmes techniques</li>
+            </ul>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact">
+            <h2>Contactez-nous</h2>
+            <form>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Services Techniques Dumont. Tous droits réservés. <a href="#mentions-legales">Mentions légales</a></p>
+    </footer>
+
+    <script>
+        // Script pour la page cachée
+        document.getElementById('clock').addEventListener('click', function() {
+            document.getElementById('hiddenPage').style.display = 'block';
+        });
+
+        // Fonction pour vérifier la réponse de l'énigme principale
+        function checkAnswer() {
+            const answer = document.getElementById('answer').value.toLowerCase();
+            if (answer === "porte") {
+                document.getElementById('result').innerHTML = "Bonne réponse ! L'énigme numero 2 est maintenant disponible.";
+                // Afficher l'énigme 2 sur la page d'accueil
+                document.getElementById('enigme2').style.display = 'block';
+            } else {
+                document.getElementById('result').innerHTML = "Mauvaise réponse.";
+            }
+        }
+
+        // Fonction pour vérifier la réponse de l'énigme 2
+        function checkEnigme2() {
+            const answer = document.getElementById('reponseEnigme2').value.toLowerCase();
+            if (answer === "salle") {
+                document.getElementById('resultEnigme2').innerHTML = "Bonne réponse ! L'énigme numero 3 est maintenant disponible.";
+                // Afficher l'énigme 3 sur la page d'accueil
+                document.getElementById('enigme3').style.display = 'block';
+            } else {
+                document.getElementById('resultEnigme2').innerHTML = "Mauvaise réponse.";
+            }
+        }
+
+        // Fonction pour vérifier la réponse de l'énigme 3
+        function checkEnigme3() {
+            const answer = document.getElementById('reponseEnigme3').value.toLowerCase();
+            if (answer === "ombre") {
+                document.getElementById('resultEnigme3').innerHTML = "Bonne réponse vous allez decouvrir un indice sur ma position.";
+                // Afficher les informations personnelles
+                document.getElementById('infoPerso').style.display = 'block';
+                revealInfo();
+            } else {
+                document.getElementById('resultEnigme3').innerHTML = "Mauvaise réponse.";
+            }
+        }
+        // Fonction pour révéler les informations progressivement
+        function revealInfo() {
+            const ip = document.getElementById('ip');
+            const name = document.getElementById('name');
+            const location = document.getElementById('location');
+            const videoLink = document.getElementById('videoLink');
+
+            setTimeout(() => {
+                ip.classList.remove('blur');
+                ip.classList.add('reveal');
+            }, 0);
+
+            setTimeout(() => {
+                name.classList.remove('blur');
+                name.classList.add('reveal');
+            }, 1500);
+
+            setTimeout(() => {
+                location.classList.remove('blur');
+                location.classList.add('reveal');
+                videoLink.style.display = 'block';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
