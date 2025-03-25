@@ -374,10 +374,6 @@
 
              <!-- Section des informations personnelles (apparaît après avoir résolu toutes les énigmes) -->
              <div id="infoPerso" class="info reveal" style="display: none">
-                <h2>Informations Trouvées</h2>
-                <div id="ip">IP : 86.45.785.11</div>
-                <div id="name">Nom : alexandra</div>
-                <div id="location">Localisation : 45.123456, -73.654321</div>
                 <a id="videoLink" class="video-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="display: none;">Voir la vidéo</a>
             </div>
         </section>
@@ -462,20 +458,10 @@
             const videoLink = document.getElementById('videoLink');
 
             setTimeout(() => {
-                ip.classList.remove('blur');
-                ip.classList.add('reveal');
-            }, 0);
-
-            setTimeout(() => {
-                name.classList.remove('blur');
-                name.classList.add('reveal');
-            }, 1500);
-
-            setTimeout(() => {
                 location.classList.remove('blur');
                 location.classList.add('reveal');
                 videoLink.style.display = 'block';
-            }, 2000);
+            }, 15000);
         }
     </script>
 </body>
