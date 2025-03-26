@@ -452,14 +452,15 @@
         }
         // Fonction pour révéler les informations progressivement
         function revealInfo() {
-            const videoLink = document.getElementById('videoLink');
+    const videoLink = document.getElementById('videoLink');
+    const infoPerso = document.getElementById('infoPerso');
 
-            setTimeout(() => {
-                location.classList.remove('blur');
-                location.classList.add('reveal');
-                videoLink.style.display = 'block';
-            }, 2000);
-        }
+    setTimeout(() => {
+        infoPerso.classList.remove('blur');
+        infoPerso.classList.add('reveal');
+        videoLink.style.display = 'block';
+    }, 3000); // 3000 ms = 3 secondes
+}
     </script>
 </body>
 </html>
